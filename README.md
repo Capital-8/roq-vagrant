@@ -6,24 +6,60 @@ Copyright (c) 2017-2018, Hans Erik Thrane
 
 ## What is it?
 
-Vagrant scripts to manage VM's. Useful for testing server provisioning.
+Provisioning of virtual machines using Vagrant and VirtualBox.
+
+Useful for testing the standard [Ansible Playbook](https://github.com/roq-trading/roq-ansible-playbook) provided by
+Roq Trading Solutions.
 
 ## Requirements
 
-Download [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
+* [Vagrant](https://www.vagrantup.com/downloads.html)
+* [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+* Ansible
 
-Download [Vagrant](https://www.vagrantup.com/downloads.html) and/or [Vagrant Manager](http://vagrantmanager.com/downloads/).
+## How to use?
 
-## Commands
+First make sure you have access to the `vagrant` and `ansible-playbook` from your current environment.
 
-All commands should be used in the same directory where you find the `Vagrantfile`.
-(You can find the VM's local address in that file).
+Refresh the git submodules using
 
-`vagrant box update` will update/upgrade the VM image.
+	`git submodule update --init --recursive`
 
-`vagrant up` will launch the VM.
-On first run it will also provision the VM with basic login.
-Please note that your `~/.ssh/id_rsa.pub` file will be uploaded to the VM so you can more easily log in to the `ansible` user.
-Now log in to the VM using `ssh ansible@<ip_address>` and use password `ansible`.
+There are directories for each of the supported Linux distributions.
 
-`vagrant halt` will stop an already running VM.
+* CentOS 7
+* Ubuntu 18.04
+* Ubuntu 16.04
+* Debian 9
+
+Change into either of these directories to start the VM. For example
+
+	cd centos_7
+	vagrant up
+
+Please note!
+Provisioning of the VM will automatically happen first time you launch it.
+This will take some time since the entire system architecture is installed from scratch.
+
+You can repeat the provisioning at a later time using
+
+	vagrant provision
+
+This will update the system architecture, if necessary.
+
+Please note!
+The provisioning step relies on internet access and may fail at any time.
+You can use `vagrant provision` to continue the installation after such errors.
+
+You can log on to the VM using
+
+	vagrant ssh
+
+And you can shut the VM down using
+
+	vagrant halt
+
+Finally, the VM image is only downloaded once and may therefore become "old".
+In order to refresh the image, run
+
+	vagrant box update

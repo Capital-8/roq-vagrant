@@ -1,0 +1,3 @@
+[submodule "roq-ansible-playbook"]
+	path = roq-ansible-playbook
+	url = https://github.com/roq-trading/roq-ansible-playbook
