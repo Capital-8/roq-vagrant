@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
   config.vm.network "private_network", ip: "192.168.33.201"
   config.vm.provider "virtualbox" do |vb|
-    vb.memory = "1024"
+    vb.memory = "2048"
     vb.cpus = 4
   end
   config.vm.provision "shell" do |shell|
@@ -13,6 +13,11 @@ Vagrant.configure("2") do |config|
   end
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "../site.yml"
+    ansible.groups = {
+      "server": "default",
+      "secure": "default",
+      "femas": "default"
+    }
     ansible.extra_vars = {
       "become_user": "root",
       "proxy_env": {
@@ -25,11 +30,6 @@ Vagrant.configure("2") do |config|
         "agent_id": "some-agent-id",
         "api_secret": "some-api-secret"
       }
-    }
-    ansible.groups = {
-      "server": "default",
-      "secure": "default",
-      "femas": "default"
     }
   end
 end
