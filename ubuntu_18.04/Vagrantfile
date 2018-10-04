@@ -6,8 +6,9 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", ip: "192.168.33.201"
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "2048"
-    vb.cpus = 4
+    vb.cpus = 3
   end
+	config.vm.network "forwarded_port", guest: 80, host: 9090
   config.vm.provision "shell" do |shell|
     shell.inline = "apt-get update && apt-get install -y python"
   end
@@ -15,21 +16,10 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "../site.yml"
     ansible.groups = {
       "trading": "default",
-      "secure": "default",
-      "femas": "default"
+      "roq-femas": "default",
     }
     ansible.extra_vars = {
       "become_user": "root",
-      "proxy_env": {
-        "http_proxy": "http://mickey-mouse.com:8080",
-        "https_proxy": "http://mickey-mouse.com:8080"
-      },
-      "wechat": {
-        "corp_id": "some-corp-id",
-        "to_party": "some-to-party",
-        "agent_id": "some-agent-id",
-        "api_secret": "some-api-secret"
-      }
     }
   end
 end
