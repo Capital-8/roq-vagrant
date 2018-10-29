@@ -21,6 +21,8 @@ Vagrant.configure("2") do |config|
     }
     ansible.extra_vars = {
       "become_user": "root",
+      "femas_use_docker": "true",
+      "collector_use_docker": "true",
     }
   end
 end
