@@ -7,5 +7,20 @@ vm_test
 [trading]
 vm_test
 
+[roq_samples]
+vm_test
+
 [roq_benchmark]
 vm_test
+
+[roq_influxdb]
+vm_test
+
+[roq_simulator]
+vm_test
+
+# [roq_coinbase_pro]
+# vm_test
+
+# [roq_deribit]
+# vm_test
