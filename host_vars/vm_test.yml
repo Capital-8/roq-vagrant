@@ -1,6 +1,146 @@
 ---
 
-become_user: root
-upgrade_system: true
-roq_conda_channel: "unstable"
 product_name: "Vagrant {{ ansible_distribution }} {{ ansible_distribution_version }}"
+
+###############
+### ANSIBLE ###
+###############
+
+become_user: root
+
+##############
+### SYSTEM ###
+##############
+
+upgrade_system: true
+
+###########
+### ROQ ###
+###########
+
+roq_version: "latest"
+roq_conda_channel: "unstable"
+
+################
+### INFLUXDB ###
+################
+
+roq_influxdb:
+  name: "influxdb"
+  logging:
+    verbosity: 0
+  options:
+    poll-freq-secs: 60
+
+###############
+### DERIBIT ###
+###############
+
+roq_deribit:
+  version: "{{ roq_version }}"
+  name: "deribit"
+  logging:
+    verbosity: 0
+  cpu_affinity:
+    dispatcher: 1
+  net:
+    fix: "tcp://test.deribit.com:9881"
+    ws: "wss://test.deribit.com/ws/api/v2"
+  symbols:
+    - ".*-PERPETUAL"
+    - ".*-DERIBIT-INDEX"
+    - .*-\\d{2}\\D{3}\\d{2}
+  accounts:
+    "A1":
+      login: "YOUR_DERIBIT_LOGIN_GOES_HERE"
+      secret: "YOUR_DERIBIT_SECRET_GOES_HERE"
+      symbols:
+        - "BTC-.*"
+        - "ETH-.*"
+      master: true
+  users:
+    test:
+      password: "1234"
+      symbols: ".*"
+    trader:
+      password: "secret"
+      accounts: "A1"
+      symbols: BTC-\\d{2}\\D{3}\\d{2}
+      monitor_period_secs: 60
+      ban_period_secs: 300
+      request_limit: 10
+    example-1:
+      password: "secret"
+      symbols: ".*"
+    example-2:
+      password: "secret"
+      symbols: ".*"
+    example-3:
+      password: "secret"
+      accounts: "A1"
+      symbols: BTC-\\d{2}\\D{3}\\d{2}
+      monitor-period-secs: 60
+      ban-period-secs: 300
+      request-limit: 5
+
+####################
+### COINBASE PRO ###
+####################
+
+roq_coinbase_pro:
+  version: "{{ roq_version }}"
+  name: "coinbase-pro"
+  logging:
+    verbosity: 0
+  cpu_affinity:
+    dispatcher: 2
+  net:
+    fix: "tcp+ssl://fix-public.sandbox.pro.coinbase.com:4198"
+    ws: "wss://ws-feed-public.sandbox.pro.coinbase.com"
+    rest: "https://api-public.sandbox.pro.coinbase.com"
+  symbols: ".*"
+  accounts:
+    "A1":
+      login: "YOUR_COINBASE_PRO_API_KEY_GOES_HERE"
+      password: "YOUR_COINBASE_PRO_PASSPHRASE_GOES_HERE"
+      secret: "YOUR_COINBASE_PRO_SECRET_GOES_HERE"
+      symbols:
+        - "BTC-.*"
+        - "ETH-.*"
+      master: true
+  users:
+    test:
+      password: "1234"
+      symbols: ".*"
+    trader:
+      password: "secret"
+      accounts: "A1"
+      symbols: "BTC-USD"
+      monitor_period_secs: 60
+      ban_period_secs: 300
+      request_limit: 10
+    example-1:
+      password: "secret"
+      symbols: ".*"
+    example-2:
+      password: "secret"
+      symbols: ".*"
+    example-3:
+      password: "secret"
+      accounts: "A1"
+      symbols: "BTC-.*"
+      monitor-period-secs: 60
+      ban-period-secs: 300
+      request-limit: 5
+
+###############
+### SAMPLES ###
+###############
+
+roq_samples:
+  version: "{{ roq_version }}"
+  name: "samples"
+  logging:
+    verbosity: 0
+  cpu_affinity:
+    dispatcher: 3  # busy poll on cpu #(3 + example index - 1)
