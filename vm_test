@@ -4,9 +4,6 @@ vm_test ansible_host="192.168.33.200"
 [secure]
 vm_test
 
-[dev]
-vm_test
-
 [trading]
 vm_test
 
