@@ -41,7 +41,7 @@ Install Vagrant by following the instructions from
 ```bash
 git submodule update --init --recursive
 
-cd centos_7
+cd ubuntu-18.04
 
 vagrant up
 ```
