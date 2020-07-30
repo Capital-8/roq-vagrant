@@ -4,12 +4,13 @@ Vagrant provisioning scripts allowing you to test
 [roq-ansible](https://github.com/roq-trading/roq-ansible) using a VirtualBox VM
 provisioned and managed by Vagrant.
 
-Possible operating systems
+These distributions are being tested
 
 * CentOS
 * Debian
-* RHEL
 * Ubuntu
+
+> We only test the **two latest** major releases from each distribution!
 
 Direct third-party dependencies
 
