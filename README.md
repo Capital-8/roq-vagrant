@@ -27,13 +27,13 @@ Direct third-party dependencies
 
 ## Prerequisites
 
-> Your host must be capable of running a VM with 4 CPU cores and 2GB RAM.
-
 Install VirtualBox by following the instructions from
 [here](https://www.virtualbox.org/wiki/Downloads).
 
 Install Vagrant by following the instructions from
 [here](https://www.vagrantup.com/downloads.html).
+
+> Your host must be capable of powering a VM requiring 4 CPU cores and 4GB RAM.
 
 
 ## Building
