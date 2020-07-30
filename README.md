@@ -1,73 +1,63 @@
-# Roq Trading Solutions
+# roq-vagrant
 
-*A C++ HFT Toolkit for Algo Traders*
+Vagrant provisioning scripts allowing you to test
+[roq-ansible](https://github.com/roq-trading/roq-ansible) using a VirtualBox VM
+provisioned and managed by Vagrant.
 
-
-## What is it?
-
-Vagrant configuration scripts for testing Ansible
-server provisioning using VirtualBox VM's.
-
-We use this to test deployment to some
-common Linux distributions
+Possible operating systems
 
 * CentOS
 * Debian
 * RHEL
 * Ubuntu
 
-> You can use a similar setup to test your own
-> configuration before you decide to update prod!
+Direct third-party dependencies
+
+* [VirtualBox](https://www.virtualbox.org/)
+* [Vagrant](https://www.vagrantup.com/)
 
 
-## Requirements
+## Operating Systems
 
-* [Vagrant](https://www.vagrantup.com/downloads.html)
-* [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-* Ansible (for help on installation, see
-  [roq-ansible](https://github.com/roq-trading/roq-ansible))
+* Linux
+* macOS
+* Windows (?)
 
-> All the VM's have been configured the following requirements
-> * 8 CPU cores (capped at 50%)
-> * 2GB RAM
->
-> Your host should be able to support this!
 
-## How to
+## Prerequisites
 
-Refresh the git submodules
+> Your host must be capable of running a VM with 8 CPU cores and 2GB RAM.
+
+### VirtualBox
+
+Follow the instructions from [here](https://www.virtualbox.org/wiki/Downloads).
+
+### Vagrant
+
+Follow the instructions from [here](https://www.vagrantup.com/downloads.html).
+
+
+## Building
 
 ```bash
 git submodule update --init --recursive
-```
 
-Change into a directory, e.g.
-
-```bash
 cd centos_7
-```
 
-Use Vagrant to manage the VirtualBox VM
-
-```bash
 vagrant up
 ```
 
-> If anything goes wrong (e.g. network timeout)
-> during the initialization of the VM, you should
-> re-run the provisioning using `vagrant provision`.
+You can re-run the provision step using `vagrant provision`, if anything goes
+wrong (e.g. network timeout).
 
-You can now log on to the VM
+
+## Using
 
 ```bash
 vagrant ssh
 ```
 
-You can halt the VM
-
-```bash
-vagrant halt
-```
+You can now use the VM for your testing.
 
 
 ## Links
