@@ -60,6 +60,11 @@ vagrant ssh
 You can now use the VM for your testing.
 
 
+## License
+
+The project is released under the terms of the MIT license.
+
+
 ## Links
 
 * [Documentation](https://roq-trading.com/docs)
