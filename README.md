@@ -10,7 +10,7 @@ These distributions are being tested
 * Debian
 * Ubuntu
 
-> We only test the **two latest** major releases from each distribution!
+> We only include the **two latest** major releases from each distribution!
 
 Direct third-party dependencies
 
